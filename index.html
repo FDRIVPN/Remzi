@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورود رمز عبور</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .input-box {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            width: 300px;
+        }
+        .button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .button:disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+        .message {
+            margin-top: 10px;
+            color: red;
+        }
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <input id="password" class="input-box" type="password" placeholder="رمز عبور">
+        <button id="submit-btn" class="button">تأیید</button>
+        <div id="message" class="message"></div>
+    </div>
+
+    <div class="container" id="success-container" style="display: none;">
+        <div class="result">سکه</div>
+        <p>۱۰۰ سکه بردی</p>
+    </div>
+
+    <script>
+        const correctPassword = "esimk";
+        let attempts = 0;
+
+        const passwordInput = document.getElementById("password");
+        const submitButton = document.getElementById("submit-btn");
+        const messageDiv = document.getElementById("message");
+        const loginContainer = document.getElementById("login-container");
+        const successContainer = document.getElementById("success-container");
+
+        submitButton.addEventListener("click", () => {
+            const enteredPassword = passwordInput.value;
+            if (enteredPassword === correctPassword) {
+                loginContainer.style.display = "none";
+                successContainer.style.display = "flex";
+            } else {
+                attempts++;
+                messageDiv.textContent = "رمز نامعتبر!";
+                if (attempts >= 3) {
+                    submitButton.disabled = true;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
